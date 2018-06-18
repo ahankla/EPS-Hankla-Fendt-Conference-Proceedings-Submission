@@ -1,0 +1,122 @@
+%% File 'sample.tex'
+%% 
+%% Copyright (C) 2003 by Maarten Sneep <sneep@nat.vu.nl>
+%% Modified 2004 by B.Ph. van Milligen <boudewijn.vanmilligen@ciemat.es>
+%% 
+%% This file may be distributed and/or modified under the conditions of
+%% the LaTeX Project Public License, either version 1.2 of this license
+%% or (at your option) any later version.  The latest version of this
+%% license is in:
+%% 
+%%    http://www.latex-project.org/lppl.txt
+%% 
+%% and version 1.2 or later is part of all distributions of LaTeX version
+%% 1999/12/01 or later.
+%% 
+\documentclass{epsconf}
+\usepackage{graphicx}
+%\usepackage{epsfig} % use this package to include EPS format figures
+\usepackage{wrapfig}
+\usepackage{amsmath}
+\newcommand{\bb}[1]{\textbf{#1}}
+
+\title{Dependence of the Nonhelical Dynamo on Shear: Numerical Exploration of the Magnetic Shear-current and stochastic $\alpha$ Effects}
+\author{\underline{A. Hankla}$^1$, C. Fendt$^1$}
+\institute{$^1$ Max Planck Institute for Astronomy, Heidelberg, Germany}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+Accretion disks are ubiquitous in astrophysical systems, ranging in scales from propoplanetary disks around stars to disks around active galactic nuclei (AGN). When the disk is mostly ionized and threaded by a weak magnetic field, the magnetorotational instability (MRI) leads to radially-inward transport of angular momentum and hence accretion~\cite{BH98}. At its heart, the MRI is driven by shear--that fluid elements at different radii move at different speeds around a central object. The importance of shear was therefore explored early on and the growth rates of the MRI were found to scale linearly with shear as expected~\cite{XX}. These studies also exposed numerical and analytical evidence for how various quantities scale: for instance,~\citet{ABL95} suggested that the ratio of Maxwell to Reynolds stress scales as the shear-to-vorticity ratio, a finding present in many other papers~\cite{XX check these HBW99, NB15, GP15} as well as our own. The total stress is also proposed to scale with shear, and not in the simple $\alpha$-disk model as parameterized by the seminal~\cite{SS73} paper. Better models are proposed in, for instance,~\cite{PCP08}.\\
+%
+However, some of these previous works may have cut out important physics due to numerical constraints that limit the simulation regime. Indeed,~\citet{SSH16} finds that within the shearing box framework, used by all of the above papers, the vertical height of the simulation domain is particularly important so as not to artificially dampen a large-scale dynamo. In exploring the aforementioned scalings as well as some others mentioned in~\cite{SSH16} over a broad range of shearing parameter in a large box, we uncover an abrupt jump 
+
+
+$(4-q)/q$
+
+
+
+The importance of the shearing parameter for MRI turbulence has already been explored~\cite{ABL95, HBW99, NB15, GP15}, exposing numerical and analytic evidence for a scaling of total stress with shear-to-vorticity ratio XXX that we also obtain. However, in studying other ratios presented in, e.g., Ref.~\cite{XXX}, we uncover an abrupt jump as a function of shear that has not previously been reported. 
+
+--update scaling with q now that know about large boxes
+ZieglerRuediger01 suggest loss of dynamo below q=0.6 (stratified)
+
+We try to see if this is due to the presence of large-scale dynamo, and if so, which dynamo mechanism. driven by small-scale?
+
+Magnetic shear-current can't explain butterfly: motivate scalings with what we find. alphaOmega, but no alpha. LesurOgilvie08 toy model: reach critical Bstrength and switch sign?
+
+Range of research on the most prominent mechanism, alpha effect...but in unstratified systems, need other mechanisms. 
+
+
+well-posed, can potentially sort out different mechanisms without interference of $\alpha$-effect. 
+
+\section{Methods}
+\subsection{Equations solved and code description}
+The basis of this project is solving the ideal compressible single-fluid magnetohydrodynamic (MHD) equations within the unstratified shearing box approximation. This is done by using the $\texttt{ATHENA}$ code with XX integrator XX and the FARGO orbital advection scheme~\cite{ATHENA:Stone+08, StoneGardiner2010}. The equations solved are as follows:
+\begin{align*}
+    \frac{\partial\rho}{\partial t}+\nabla\cdot(\rho\bb{v})=0, &\hspace{.5in}  \frac{\partial\bb{B}}{\partial t} - \nabla\times(\bb{v}\times\bb{B})=0,\\
+    \frac{\partial\rho\bb{v}}{\partial t} + \nabla\cdot(\rho\bb{vv}+\bb{T})&= -2\rho\Omega\hat z\times\bb{v}+2q\rho\Omega^2~x\hat x
+\end{align*}
+where 
+\begin{equation*}
+    \bb{T} = \left(P+\frac{\bb{B}\cdot\bb{B}}{8\pi}\right)\bb{I}-\frac{\bb{BB}}{4\pi}
+\end{equation*}
+is the total stress tensor. As usual, $\rho$ is mass density, $\bf{v}$ is the plasma velocity, and $\bf{B}$ is the magnetic field. Here, the disk is rotating with angular frequency $\Omega\hat z$, and $\hat x$ is the radial direction. The main focus of this work varies the shearing parameter $q$, defined through $\Omega\sim r^{-q}$ as $q=-d\ln\Omega/d\ln r$. Hence $q=3/2$ corresponds to the familiar Keplerian rotation profile.\\
+%
+Simulations are run with an adiabatic equation of state with a box size of $[L_x,~L_y,~L_z] = [1,~4,~4] H$ and resolution of 64, 128, and 256 zones, or 64, 32, and 64 zones/$H$, unless otherwise stated. The magnetic field configuration is $\bf{B}=B_0\sin(2\pi x/L_x)\hat z$ (zero net flux) with $B_0$ defined via the plasma beta parameter $\beta = 8\pi P_0/B_0^2 = 4000$. 
+
+\subsection{Calculation of Transport Coefficients: Projection Method}
+To calculate the dynamo transport coefficients $\alpha$ and $\eta$, we employ the projection method outlined in Refs.~\cite{BS02, SB16}.
+
+\section{Results}
+Scaling of total stress with shear, compare PCP08Fig. 1...bigger boxes --> dynamo action?
+
+Is due to bigger box size (compare resolutions  and box size).
+why q=1.2? NOT 0.6 suggested earlier...due to unstrat? is it even dynamo?
+
+Presence of dynamo? SSH16 results, scaling with q
+
+
+\section{Conclusions}
+magnetic Prandtl number, larger boxes, statistical ensemble...
+
+
+Text of the contribution. As an example, we include a figure (Fig.~\ref{fig:flow}). The rest of
+this text is just filler material.
+
+\begin{wrapfigure}{r}{70mm}\centering
+\vspace{0cm} % Adjust vertical figure placement
+\includegraphics[width=70mm]{epslogo}
+\caption{\it \small EPS logo}
+\label{fig:flow}
+\vspace{0cm} % Adjust vertical figure spacing
+\end{wrapfigure}
+
+\begin{equation}
+\label{eq:prad}
+    P_{\text{\scriptsize rad}} =
+    \left( \frac{\omega^4}{32 \epsilon_0 \pi^2 c^3}\,p_{\text{\scriptsize max}}^2 \right)
+    \int_{\varphi=0}^{2\pi} \int_{\vartheta'=0}^{\pi} \sin^3\vartheta'\,d\vartheta'\,d\varphi
+    = \frac{1}{4\pi\epsilon_0}\,\frac{\omega^4}{3 c^3}\,p_{\text{\scriptsize max}}^2
+\end{equation}
+As Eq.~(\ref{eq:prad}) shows~\cite{Interestingpaper}, bla bla bla.
+Filler text, filler text, filler text.
+Filler text, filler text, filler text.
+Filler text, filler text, filler text.
+Filler text, filler text, filler text.
+Filler text, filler text, filler text.
+Filler text, filler text, filler text.
+Filler text, filler text, filler text.
+
+\begin{thebibliography}{99}
+\bibitem{Interestingpaper}
+A. First, B.C. Second and D. Third, Journal of interesting papers {\bf 10}, 10 (2004)
+\bibitem{Anotherpaper}
+A. First, B.C. Second and D. Third, Journal of interesting papers {\bf 11}, 11 (2004)
+\end{thebibliography}
+
+\end{document}
+\endinput
+%%
+%% End of file `sample.tex'.
